@@ -6,7 +6,7 @@
     - proxy.yml
   environment: "{{ proxy_env }}"
   roles:
-    - ../activiti_common/common
+    - ../ansible_common/common
     - { role: ../ansible_common/postgres, db_name: activiti, db_passwd: "{{ db_passwd_activiti }}" }
-    - ../activiti_common/tomcat
+    - ../ansible_common/tomcat
     - { role: activiti, db_name: activiti, db_passwd: "{{ db_passwd_activiti }}" }
