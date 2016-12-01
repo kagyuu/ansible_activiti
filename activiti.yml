@@ -10,3 +10,4 @@
     - { role: ../ansible_common/postgres, db_name: activiti, db_passwd: "{{ db_passwd_activiti }}" }
     - ../ansible_common/tomcat
     - { role: activiti, db_name: activiti, db_passwd: "{{ db_passwd_activiti }}" }
+    - { role: ../ansible_common/firewalld, PORTS:["4848/tcp","8080/tcp","5432/tcp"] }
