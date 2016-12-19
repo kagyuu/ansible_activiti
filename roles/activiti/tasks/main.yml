@@ -44,6 +44,7 @@
     chdir=/tmp
     jar -uf activiti-{{ activiti_version }}/wars/activiti-rest.war WEB-INF/classes/engine.properties
 
+# Create sample db and users by activiti-exploer
 - name: deploy activiti
   copy:
     src=/tmp/activiti-{{ activiti_version }}/wars/activiti-{{ item }}.war
@@ -53,15 +54,8 @@
     - explorer
     - rest
 
-- name: wait activiti-explorer creates db and insert sample data.
-- pause:
-    minutes: 1
-
-- name: stop tomcat
-  service:
-    name=tomcat
-    state=stopped
-
+# Create another activiti-exploer version that will never create sample db and users.
+# And replace default activiti-exploer to the version.
 - name: create engine.properties for activiti-explorer (don't create test users and sample reports)
   template:
     src=explorer_engine.properties
@@ -72,6 +66,15 @@
   command:
     chdir=/tmp
     jar -uf activiti-{{ activiti_version }}/wars/activiti-explorer.war WEB-INF/classes/engine.properties
+
+- name: wait activiti-explorer creates db and insert sample data.
+  pause:
+    minutes: 1
+
+- name: stop tomcat
+  service:
+    name=tomcat
+    state=stopped
 
 - name: deploy activiti
   copy:
