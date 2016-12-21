@@ -78,7 +78,7 @@
 
 - name: deploy activiti
   copy:
-    src=/tmp/activiti-explorer/wars/activiti-{{ item }}.war
+    src=/tmp/activiti-explorer/wars/activiti-explorer.war
     dest=/opt/tomcat/webapps/activiti-explorer.war
     remote_src=True
 
